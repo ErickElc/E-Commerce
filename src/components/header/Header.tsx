@@ -1,46 +1,32 @@
-import { TextField, IconButton } from "@mui/material"
+import { useModalHeaderContext } from "../../context/ModalHeader/ModalHeader";
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import SearchIcon from '@mui/icons-material/Search';
-import { HeaderLayout } from "../../styles/components";
-import React, { useState } from "react";
-
+import { HeaderLayout, TitleHeader } from "../../styles/components";
+import InputHeader from "../InputHeader/inputHeader";
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
+import { IconButton } from "@mui/material"
 export default function Header(){
-    const [input, setInput] = useState({
-        search: ''
-    })
-    function handleChange(e : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>){
-        setInput(prev => ({...prev, search: e.target.value}));
-    }
-
-    function SubmitForm(e: React.FormEvent<HTMLFormElement>){
-        e.preventDefault();
-        if(input.search === '') return null;
-        console.log(input.search);
-        setInput({search: ''});
+    const headerContext = useModalHeaderContext();
+    function ToggleMode(){
+        headerContext.openModal();
     }
     return (
         <HeaderLayout>
-            <h2 className="text-2xl font-bold text-white">Preço garantido!</h2>
-            <form onSubmit={SubmitForm}>
-                <TextField
-                    value={input.search}
-                    id="filled-basic"
-                    variant="filled"
-                    color="warning"
-                    label="Procurar um produto"
-                    onChange={handleChange}
-                    InputProps={{
-                        endAdornment: (
-                            <IconButton type="submit">
-                                <SearchIcon/>
-                            </IconButton>
-                        )
-                    }}
-                />
-            </form>
-            <IconButton>
-                <LocalGroceryStoreIcon style={{color: "white"}}/>
-            </IconButton>
+            <TitleHeader className="text-2xl font-bold text-white">Preço garantido!</TitleHeader>
+            {(headerContext.attRes >= 630) ? <InputHeader/> : ''}
+            <div>
+                {
+                (headerContext.attRes >= 630) 
+                ? <IconButton>
+                    <LocalGroceryStoreIcon style={{color: "white"}}/>: {0}
+                </IconButton> 
+                : '' }
+                <IconButton onClick={ToggleMode}>
+                    {(headerContext.modalState.open !== true)
+                    ? <MenuIcon color="info" style={{height: '40px', width: '40px', color: 'white'}}/>
+                    : <CloseIcon color="info" style={{height: '40px', width: '40px', color: 'white'}}/>}
+                </IconButton>
+            </div>
         </HeaderLayout>
     )
 }

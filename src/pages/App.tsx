@@ -1,10 +1,13 @@
+import { ModalHeaderProvider } from "../context/ModalHeader/ModalHeader";
 import Home from "./home/home";
 
 function App() {
   return (
-    <div className="App">
-      <Home/>
-    </div>
+    <ModalHeaderProvider>
+      <div className="App">
+        <Home/>
+      </div>
+    </ModalHeaderProvider>
   );
 }
 

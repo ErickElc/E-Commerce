@@ -6,6 +6,17 @@ export const HeaderLayout = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 450px) {
+        font-size: 20px;
+    }
+`
+export const TitleHeader = styled.h2`
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    @media (max-width: 450px) {
+        font-size: 20px;
+    }
 `
 export const SectionLayout = styled.section`
     display: flex;  
@@ -13,7 +24,7 @@ export const SectionLayout = styled.section`
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 100vw;
+    width: 99vw;
     background: #2980b9; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #2980b9, #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2980b9, #2c3e50);
@@ -21,9 +32,10 @@ export const SectionLayout = styled.section`
 `
 export const BannerSection = styled.img`
     max-height: 400px;
-    min-width: 100vw;
+    min-width: 98vw;
     background-size: cover;
-    min-width: 1150px;
+    height: 300px;
+    min-width: 750px;
     @media (max-width: 1350px) {
         min-width: 750px;
     }
@@ -32,5 +44,51 @@ export const BannerSection = styled.img`
     }
     @media (max-width: 550px) {
         min-width: 250px;
+        height: 150px;
+    }
+`
+
+export const ContainerProdutos = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+`
+export const ImgProdutos = styled.img`
+    width: 150px;
+    height: 150px;
+`
+export const ContainerLista = styled.div`
+
+    max-width: 700px;
+    display: flex;
+    flex-flow: wrap row;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    @media (max-width : 435px)  {
+        justify-content: center
+    }
+`
+export const ListComponent = styled.li`
+    margin: 30px;
+`
+export const ModalHeaderLayout = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-flow: column wrap;
+    background-color: #001E6C;
+    width: 150px;
+    position: absolute;
+    top: 10px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 0px #676767; 
+    margin-left: 80vw;
+    margin-right: 30px;
+    @media (max-width: 770px) {
+        margin-right: 100px;
     }
 `
