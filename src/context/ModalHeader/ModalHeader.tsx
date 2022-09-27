@@ -12,7 +12,7 @@ export const ModalHeaderProvider = ({children} : IAuthProvider) => {
     }
     const attRes = window.innerWidth;
     
-    return <ModalHeaderContext.Provider value={{modalState, openModal, attRes}}> { children } </ModalHeaderContext.Provider>   
+    return <ModalHeaderContext.Provider value={{modalState, openModal, attRes}}> { [ children ] } </ModalHeaderContext.Provider>   
 }
 
 export const useModalHeaderContext = () => {

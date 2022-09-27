@@ -92,3 +92,56 @@ export const ModalHeaderLayout = styled.div`
         margin-right: 100px;
     }
 `
+export const SpanSection = styled.span`
+    font-weight: bold;
+    cursor: pointer;
+    &:hover{
+        color: orangered;
+    }
+    &:active{
+        color: orange
+    }
+`
+export const FormComponent = styled.form`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column wrap;
+    border-radius: 10px;
+    padding: 50px;
+    -moz-box-shadow: 0px 1px 5px 0px #676767;
+    -webkit-box-shadow: 0px 1px 5px 0px #676767;
+    box-shadow: 0px 1px 5px 0px #676767;
+    margin-top: 30px;
+
+`
+export const ConteinerCadastro = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+`
+export const ImageProduto = styled.img`
+    height: 300px;
+`
+export const ContainerProduto = styled.div`
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    justify-content: center;
+`
+export const ProdutoComponent = styled.div`
+    -moz-box-shadow: 0px 1px 5px 0px #676767;
+    -webkit-box-shadow: 0px 1px 5px 0px #676767;
+    box-shadow: 0px 1px 5px 0px #676767;
+    margin-top: 30px;
+    padding: 50px;
+`
+
+export const FlexContainer = styled.div`
+    max-width: 310px;
+    display: flex;
+    flex-flow: wrap column;
+`
