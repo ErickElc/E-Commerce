@@ -5,10 +5,11 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import {Link} from 'react-router-dom'
 import { SpanSection } from '../../styles/components';
+import { useAuthContext } from '../../auth/auth';
 export default function Section(){
+    const auth  = useAuthContext()
     const User = getUserLocalStorage();
-
-
+    const route = `conta/${User?.id}`
     return(
         <section className='flex justify-between bg-black text-white p-3'>
             <ul className='flex justify-between'>
@@ -28,13 +29,14 @@ export default function Section(){
             <div className='flex justify-between'>
                 {(!User?.token) ? 
                     <ul className='flex justify-between'>
-                        <li className='mx-2'><SpanSection>Login</SpanSection></li>
-                        <li className='mx-2'><SpanSection>Cadastro</SpanSection></li>
+                        <li className='mx-2'><SpanSection><Link to='/login'>Login</Link></SpanSection></li>
+                        <li className='mx-2'><SpanSection><Link to='/cadastrar'>Cadastro</Link></SpanSection></li>
                     </ul>
                     :
                     <div className='flex'>
                         <PersonIcon style={{color: 'red', height: '20px'}} className="self-center"/>
-                        <SpanSection className='ml-2 flex self-center text-sm'>Minha Conta</SpanSection>
+                        <SpanSection className='ml-2 flex self-center text-sm'><Link to={route} >Minha Conta</Link></SpanSection>
+                        <SpanSection  className="ml-2 flex self-center text-sm"onClick={auth.logout}>logout</SpanSection>
                     </div>
                 }
             </div>

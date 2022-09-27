@@ -1,11 +1,14 @@
 
 export interface IUser{
+    _id: string;
     name: string,
     email: string,
     password: string
     createdDate: string
 }
 export interface IToken{
-    token?: String,
-    email?:String
+    token?: string,
+    email?: string,
+    _id?: string;
+    name?: string,
 }

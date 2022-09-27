@@ -2,7 +2,7 @@ export interface IAuthProvider{
     children: JSX.Element;
 }
 export interface IContext {
-    authenticate: (email: string, password: string) => Promise<number | undefined>;
+    authenticate: (email: string, password: string) => Promise<number| undefined>;
     logout: () => void;
-    VerifyLoggin: () => void
+    VerifyLoggin: () => void | Promise<void>
 }

@@ -1,0 +1,12 @@
+.Container{
+    .Form{
+        .Inputs{
+            width: 300px;
+            margin-top: 20px;
+            @media (max-width: 768px) {
+                width: 230px;
+            }       
+        }
+    }
+}
+

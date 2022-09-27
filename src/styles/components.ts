@@ -24,7 +24,7 @@ export const SectionLayout = styled.section`
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 99vw;
+    max-width: 100vw;
     background: #2980b9; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #2980b9, #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2980b9, #2c3e50);
@@ -113,14 +113,16 @@ export const FormComponent = styled.form`
     -webkit-box-shadow: 0px 1px 5px 0px #676767;
     box-shadow: 0px 1px 5px 0px #676767;
     margin-top: 30px;
+    background-color: white;
 
 `
-export const ConteinerCadastro = styled.div`
+export const ConteinerCadastroProduto = styled.div`
     display: flex;
     flex-flow: column wrap;
     height: 100vh;
     align-items: center;
     justify-content: center;
+    background-color: #5800FF;
 
 `
 export const ImageProduto = styled.img`
@@ -144,4 +146,33 @@ export const FlexContainer = styled.div`
     max-width: 310px;
     display: flex;
     flex-flow: wrap column;
+`
+
+export const ContainerCadastro = styled.div`
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #5800FF;
+`
+
+export const ContainerFormularioCadastro = styled.form`
+    -moz-box-shadow: 0px 1px 5px 0px #676767;
+    -webkit-box-shadow: 0px 1px 5px 0px #676767;
+    box-shadow: 0px 1px 5px 0px #676767;
+    padding: 40px;
+    background-color: white;
+    margin-bottom: 100px;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    @media (max-width: 768px) {
+        padding: 25px;
+    }
+`
+export const TextLink = styled.h2`
+    color: #0096FF;
+    text-decoration: underline;
+    text-align: start;
+    margin-top: 10px;
 `

@@ -1,6 +1,6 @@
 import { apiBack_End } from "../api/api";
-import { IToken } from "../interfaces/user";
-export const setUserLocalStorage = (user: IToken | null) =>{
+import {  IToken } from "../interfaces/user";
+export const setUserLocalStorage = (user: IToken| null) =>{
     localStorage.setItem('u', JSON.stringify(user));
 }
 export const getUserLocalStorage = () => {
@@ -11,11 +11,12 @@ export const getUserLocalStorage = () => {
 }
 export async function loginRequest(email: string, password: string){
     try {
-        const request = await apiBack_End.post('/api/users/login',{
+        const request = await apiBack_End.post('api/users/login',{
             email: email,
             password: password
         })
-        return request;
+        console.log(request)
+        return {data: request.data, status: request.status};
     } catch (error) {
         return null;
     }
