@@ -1,7 +1,7 @@
 import { getUserLocalStorage, loginRequest, setUserLocalStorage } from "./util";
 import { createContext, useContext, useState, useEffect } from "react";
-import { IAuthProvider, IContext } from "../interfaces/Auth";
-import { IToken} from "../interfaces/user";
+import { IAuthProvider, IContext } from "../interfaces/interfaces";
+import { IToken} from "../interfaces/interfaces";
 import { apiBack_End } from "../api/api";
 
 
@@ -12,7 +12,7 @@ export const AuthContext = createContext<IContext>({} as IContext);
 export const AuthProvider = ({children}: IAuthProvider) =>{
     const [user, setUser] = useState<IToken | null>();
     useEffect(()=>{
-        const User = getUserLocalStorage()
+        const User = getUserLocalStorage();
         if(User){
             setUser(User);
         }
@@ -30,7 +30,6 @@ export const AuthProvider = ({children}: IAuthProvider) =>{
     }
     async function authenticate(email: string, password: string){
         const Request = await loginRequest(email, password);
-        console.log(Request?.outerData)
         const payload = {token: Request?.data, email: email, name: Request?.outerData?.name, id: Request?.outerData?._id};
         setUserLocalStorage(payload);
         setUser(payload);

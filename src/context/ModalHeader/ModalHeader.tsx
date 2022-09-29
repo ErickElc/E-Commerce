@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { IAuthProvider, IContextModal, IModalState } from '../../interfaces/modalInterface'
+import { IAuthProvider, IContextModal, IModalState } from '../../interfaces/interfaces'
 
 
 export const ModalHeaderContext = createContext<IContextModal>( {} as IContextModal);

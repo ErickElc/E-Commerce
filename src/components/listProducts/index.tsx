@@ -1,5 +1,5 @@
 import { ContainerLista, ImgProdutos, ListComponent } from "../../styles/components";
-import { IProducts } from "../../interfaces/products";
+import { IProducts } from "../../interfaces/interfaces";
 import { useEffect, useState } from "react";
 import { apiBack_End } from "../../api/api";
 import { Link } from 'react-router-dom';

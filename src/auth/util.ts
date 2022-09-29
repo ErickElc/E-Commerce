@@ -1,5 +1,5 @@
 import { apiBack_End } from "../api/api";
-import {  IToken } from "../interfaces/user";
+import { IToken } from "../interfaces/interfaces";
 export const setUserLocalStorage = (user: IToken| null) =>{
     localStorage.setItem('u', JSON.stringify(user));
 }

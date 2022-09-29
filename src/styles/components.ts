@@ -15,6 +15,9 @@ export const TitleHeader = styled.h2`
     font-size: 24px;
     font-weight: bold;
     color: white;
+    @media (max-width: 700px) {
+        margin-bottom: 10px;
+    }
     @media (max-width: 450px) {
         font-size: 20px;
     }
@@ -216,6 +219,7 @@ export const SectionUl = styled.ul`
 `
 export const SectionMenu = styled.section`
     @media (max-width: 700px) {
+        flex-flow: column;
         justify-content: center;
         
     }
@@ -224,5 +228,23 @@ export const ContainerPopUp = styled.div`
     display: none;
     @media (max-width: 700px) {
         display: flex;
+        flex-flow: column;
     }
+`
+export const ContainerListSection = styled.div`
+    @media (max-width: 700px) {
+        display: none
+    }
+
+`
+export const SpanBorder = styled.span`
+    border-bottom: 1px red solid; 
+    margin-bottom: 10px;
+`
+export const ContainerUserCommand = styled.div`
+    display: flex;
+    @media (min-width: 700px) {
+        display: none
+    }
+
 `

@@ -8,21 +8,24 @@ import Home from "./home/home";
 import Produto from "./produto";
 import { AuthProvider } from "../auth/auth";
 import ContaConfig from "./ContaConfig/contaConfig";
+import { CarrinhoProvider } from "../context/Carrinho/Carrinho";
 function App() {
   return (
     <ModalHeaderProvider>
       <AuthProvider>
-        <Routes>
-          <Route path='/' element={<PaginaPadrao/>}>
-            <Route index element={<Home/>}/>
-            <Route path='/produtos/:id' element={<Produto/>}/>
-            <Route path='*' element={<h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1>}/>
-            <Route path='/conta/:id' element={<ContaConfig/>} />
-          </Route>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/cadastrar" element={<Cadastrar/>}/>
-          <Route path="/produtos/novo" element={<CadastroProduto/>}/>
-        </Routes>
+        <CarrinhoProvider>
+          <Routes>
+            <Route path='/' element={<PaginaPadrao/>}>
+              <Route index element={<Home/>}/>
+              <Route path='/produtos/:id' element={<Produto/>}/>
+              <Route path='*' element={<h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1>}/>
+              <Route path='/conta/:id' element={<ContaConfig/>} />
+            </Route>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/cadastrar" element={<Cadastrar/>}/>
+            <Route path="/produtos/novo" element={<CadastroProduto/>}/>
+          </Routes>
+        </CarrinhoProvider>
       </AuthProvider>
     </ModalHeaderProvider>
   );

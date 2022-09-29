@@ -1,17 +1,19 @@
 import { ContainerPrazos, ContainerProduto, FlexContainer, ImageProduto, LayoutProduto, ProdutoComponent, SpanEntrega } from '../../styles/components';
-import { IProducts } from '../../interfaces/products';
-import { IEntrega } from '../../interfaces/entrega';
+import { useCarrinhoContext } from '../../context/Carrinho/Carrinho';
+import { IProducts } from '../../interfaces/interfaces';
+import { IEntrega } from '../../interfaces/interfaces';
 import { Button, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { apiBack_End } from '../../api/api';
 import {useParams} from 'react-router-dom';
 export default function Produto(){
+    const {id} = useParams();
     const [produto, setProduto] = useState< IProducts | null>();
+    const [data, setData] = useState<IEntrega | null>()
     const [input, setInput] = useState({
         cep: ''
     })
-    const [data, setData] = useState<IEntrega | null>()
-    const {id} = useParams();
+    const produtosContext = useCarrinhoContext();
     useEffect(()=>{
         apiBack_End.get('api/products/list/' + id)
         .then((res)=>{
@@ -32,6 +34,15 @@ export default function Produto(){
             console.log(error);
         }
     }
+    async function AddItemNoCarrinho(){
+        try {
+            const res = await produtosContext.Add_Item(id);
+            if(res !== 200) return alert('Não foi possível colocar o item no carrinho')
+            alert("Produto Adicionado com sucesso!")
+        } catch (error) {
+            alert('Não foi possível colocar o item no carrinho')
+        }
+    }
     return (
         <ContainerProduto>
             <ProdutoComponent className='mb-10'>
@@ -44,7 +55,7 @@ export default function Produto(){
                         <h2 className='text-orange-500 font-bold text-4xl mb-2'>R$ {(produtoValue).toFixed(2)}</h2>
                         <Button fullWidth variant="contained" className="inputs" type="submit" color="error">Comprar</Button>
                         <span className='mt-3'></span>
-                        <Button fullWidth variant="outlined" className="inputs mb-10" type="submit" color="error">Adicionar ao Carrinho</Button>
+                        <Button fullWidth variant="outlined" className="inputs mb-10" type="submit" color="error" onClick={AddItemNoCarrinho}>Adicionar ao Carrinho</Button>
                     </FlexContainer>
                 </LayoutProduto>
                 <div>
