@@ -1,19 +1,22 @@
 import { ContainerPrazos, ContainerProduto, FlexContainer, ImageProduto, LayoutProduto, ProdutoComponent, SpanEntrega } from '../../styles/components';
 import { useCarrinhoContext } from '../../context/Carrinho/Carrinho';
+import { useParams, useNavigate} from 'react-router-dom';
 import { IProducts } from '../../interfaces/interfaces';
 import { IEntrega } from '../../interfaces/interfaces';
 import { Button, TextField } from '@mui/material';
+import { useAuthContext } from '../../auth/auth';
 import { useEffect, useState } from 'react';
 import { apiBack_End } from '../../api/api';
-import {useParams} from 'react-router-dom';
 export default function Produto(){
     const {id} = useParams();
+    const auth = useAuthContext();
+    const navigate = useNavigate();
+    const produtosContext = useCarrinhoContext();
     const [produto, setProduto] = useState< IProducts | null>();
     const [data, setData] = useState<IEntrega | null>()
     const [input, setInput] = useState({
         cep: ''
     })
-    const produtosContext = useCarrinhoContext();
     useEffect(()=>{
         apiBack_End.get('api/products/list/' + id)
         .then((res)=>{
@@ -36,6 +39,11 @@ export default function Produto(){
     }
     async function AddItemNoCarrinho(){
         try {
+            const resVerify = await auth.VerifyLoggin();
+            if(resVerify === false) {
+                alert('Precisa estar logado para comprar!');
+                return navigate('/login')
+            }
             const res = await produtosContext.Add_Item(id);
             if(res !== 200) return alert('Não foi possível colocar o item no carrinho')
             alert("Produto Adicionado com sucesso!")

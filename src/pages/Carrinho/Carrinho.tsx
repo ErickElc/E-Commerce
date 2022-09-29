@@ -10,17 +10,17 @@ export default function Carrinho(){
     return(
         <ProtectedLayoutPrivatePageUser>
             <TableContainer>
-                {/* <Table>
+                <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                _id
+                                imagem
                             </TableCell>
                             <TableCell>
                                 Nome
                             </TableCell>
                             <TableCell>
-                                email
+                                valor
                             </TableCell>
                             <TableCell>
                                 Excluir
@@ -31,23 +31,23 @@ export default function Carrinho(){
                         {Produtos?.map((items: IProducts) =>
                             <TableRow key={items._id}>
                                 <TableCell>
-                                    "{items._id}"
+                                    <img src={items.url_image}/>
                                 </TableCell>
                                 <TableCell>
                                     {items.name}
                                 </TableCell>
                                 <TableCell>
-                                    {items.email}
+                                    {items.value}
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant="outlined" color="error" onClick={ () => {ExcluirElementos(items._id) }}>
+                                    {/* <Button variant="outlined" color="error" onClick={ () => {ExcluirElementos(items._id) }}>
                                         Excluir
-                                    </Button>
+                                    </Button> */}
                                 </TableCell>
                             </TableRow> 
                         )}
                     </TableBody>
-                </Table> */}
+                </Table>
             </TableContainer>
         </ProtectedLayoutPrivatePageUser>
     )

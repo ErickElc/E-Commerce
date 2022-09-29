@@ -6,7 +6,7 @@ export default function ContaConfig(){
     return(
         <ProtectedLayoutPrivatePageUser>
             <div>
-                PARABENS Você passou
+                Em Breve!
             </div>
         </ProtectedLayoutPrivatePageUser>
     )

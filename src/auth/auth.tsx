@@ -2,6 +2,7 @@ import { getUserLocalStorage, loginRequest, setUserLocalStorage } from "./util";
 import { createContext, useContext, useState, useEffect } from "react";
 import { IAuthProvider, IContext } from "../interfaces/interfaces";
 import { IToken} from "../interfaces/interfaces";
+import { useNavigate } from "react-router-dom";
 import { apiBack_End } from "../api/api";
 
 
@@ -11,6 +12,7 @@ export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({children}: IAuthProvider) =>{
     const [user, setUser] = useState<IToken | null>();
+    const navigate = useNavigate();
     useEffect(()=>{
         const User = getUserLocalStorage();
         if(User){
@@ -22,10 +24,10 @@ export const AuthProvider = ({children}: IAuthProvider) =>{
             await apiBack_End.post('admin/free',{
                 token: user?.token
             });
-            return console.log('autorizado');
+            return true
             
         } catch (error) {
-            return console.log('não autorizado');
+            return false
         }
     }
     async function authenticate(email: string, password: string){

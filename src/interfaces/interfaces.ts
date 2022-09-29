@@ -8,7 +8,7 @@ export interface IAuthProvider{
 export interface IContext {
     authenticate: (email: string, password: string) => Promise<number| undefined>;
     logout: () => void;
-    VerifyLoggin: () => void | Promise<void>
+    VerifyLoggin: () => void | Promise<Boolean>
 }
 export interface IModalState {
     open?: boolean
