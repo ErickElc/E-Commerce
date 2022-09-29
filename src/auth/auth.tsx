@@ -2,7 +2,6 @@ import { getUserLocalStorage, loginRequest, setUserLocalStorage } from "./util";
 import { createContext, useContext, useState, useEffect } from "react";
 import { IAuthProvider, IContext } from "../interfaces/interfaces";
 import { IToken} from "../interfaces/interfaces";
-import { useNavigate } from "react-router-dom";
 import { apiBack_End } from "../api/api";
 
 
@@ -12,7 +11,6 @@ export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({children}: IAuthProvider) =>{
     const [user, setUser] = useState<IToken | null>();
-    const navigate = useNavigate();
     useEffect(()=>{
         const User = getUserLocalStorage();
         if(User){
@@ -21,8 +19,9 @@ export const AuthProvider = ({children}: IAuthProvider) =>{
     },[])
     const VerifyLoggin = async () => {
         try {
-            await apiBack_End.post('admin/free',{
-                token: user?.token
+            await apiBack_End.post('auth/free',{
+                token: user?.token,
+                email: user?.email
             });
             return true
             

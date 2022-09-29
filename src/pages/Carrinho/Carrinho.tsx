@@ -1,20 +1,21 @@
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button} from "@mui/material";
-import { ProtectedLayoutPrivatePageUser } from "../../components/protectedLayout/ProtectedLayout";
+import { ProtectedLayoutNoLogged, ProtectedLayoutPrivatePageUser } from "../../components/protectedLayout/ProtectedLayout";
 import { useCarrinhoContext } from "../../context/Carrinho/Carrinho";
 import { getProdutosLocalStorage } from "../../context/Carrinho/util";
 import { IProducts } from "../../interfaces/interfaces";
+import { ImageCarrinho } from "../../styles/components";
 
 export default function Carrinho(){
     const Produtos = getProdutosLocalStorage();
     const produtosContext = useCarrinhoContext();
     return(
-        <ProtectedLayoutPrivatePageUser>
+        <ProtectedLayoutNoLogged>
             <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                imagem
+                              
                             </TableCell>
                             <TableCell>
                                 Nome
@@ -31,25 +32,26 @@ export default function Carrinho(){
                         {Produtos?.map((items: IProducts) =>
                             <TableRow key={items._id}>
                                 <TableCell>
-                                    <img src={items.url_image}/>
+                                    <ImageCarrinho src={items.url_image} alt={items.name}/>
                                 </TableCell>
                                 <TableCell>
                                     {items.name}
                                 </TableCell>
                                 <TableCell>
-                                    {items.value}
+                                    R$ {items.value}
                                 </TableCell>
                                 <TableCell>
-                                    {/* <Button variant="outlined" color="error" onClick={ () => {ExcluirElementos(items._id) }}>
+                                    <Button variant="outlined" color="error">
                                         Excluir
-                                    </Button> */}
+                                    </Button>
                                 </TableCell>
                             </TableRow> 
                         )}
                     </TableBody>
                 </Table>
+                <Button className="m-4" fullWidth variant="contained" color="primary">Comprar</Button>
             </TableContainer>
-        </ProtectedLayoutPrivatePageUser>
+        </ProtectedLayoutNoLogged>
     )
 
 

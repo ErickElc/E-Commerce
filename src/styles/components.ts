@@ -248,3 +248,7 @@ export const ContainerUserCommand = styled.div`
     }
 
 `
+export const ImageCarrinho = styled.img`
+    height: 50px;
+    width: 50px
+`

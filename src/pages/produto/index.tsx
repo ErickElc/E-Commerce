@@ -12,8 +12,8 @@ export default function Produto(){
     const auth = useAuthContext();
     const navigate = useNavigate();
     const produtosContext = useCarrinhoContext();
-    const [produto, setProduto] = useState< IProducts | null>();
     const [data, setData] = useState<IEntrega | null>()
+    const [produto, setProduto] = useState< IProducts | null>();
     const [input, setInput] = useState({
         cep: ''
     })
@@ -40,15 +40,16 @@ export default function Produto(){
     async function AddItemNoCarrinho(){
         try {
             const resVerify = await auth.VerifyLoggin();
+            console.log(resVerify)
             if(resVerify === false) {
                 alert('Precisa estar logado para comprar!');
-                return navigate('/login')
+                return navigate('/login');
             }
             const res = await produtosContext.Add_Item(id);
-            if(res !== 200) return alert('Não foi possível colocar o item no carrinho')
-            alert("Produto Adicionado com sucesso!")
+            if(res !== 200) return alert('Não foi possível colocar o item no carrinho');
+            alert("Produto Adicionado com sucesso!");
         } catch (error) {
-            alert('Não foi possível colocar o item no carrinho')
+            alert('Não foi possível colocar o item no carrinho');
         }
     }
     return (
