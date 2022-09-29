@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { apiBack_End } from "../../api/api";
 import { getUserLocalStorage } from "../../auth/util";
 import PaginaPadrao from "../PaginaPadrao";
@@ -65,4 +65,26 @@ export function ProtectedLayoutAdmin({children}: {children:JSX.Element}){
         }
     }
     return VerifyLoggin(response);
+}
+export function ProtectedLayoutPrivatePageUser({children} : {children: JSX.Element}){
+    const {id} = useParams();
+    const User = getUserLocalStorage();
+    const [response , setResponse] = useState<Number | null>(null);
+    useEffect(()=>{
+        apiBack_End.post(`auth/private/free/${id}`,{
+            token: User?.token,
+            email: User?.email
+        }).then(res => setResponse(res.status)).catch((err) => {
+            setResponse(err.response.status)
+        })
+    },[User,id])
+    const VerifyLoggin = (status: Number | null) => {
+        if(status === 202){
+            return children;
+        }else{
+            return <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1>;
+        }
+    }
+    return VerifyLoggin(response);
+
 }

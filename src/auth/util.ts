@@ -15,8 +15,11 @@ export async function loginRequest(email: string, password: string){
             email: email,
             password: password
         })
-        console.log(request)
-        return {data: request.data, status: request.status};
+        const dataRequest = await apiBack_End.post('api/users/list/email',{
+            email: email
+        })
+        console.log(dataRequest)
+        return {data: request.data, status: request.status, outerData: dataRequest.data};
     } catch (error) {
         return null;
     }

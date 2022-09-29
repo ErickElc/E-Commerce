@@ -11,23 +11,12 @@ export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({children}: IAuthProvider) =>{
     const [user, setUser] = useState<IToken | null>();
-    const [data, setData] = useState<IToken| null>();
-
     useEffect(()=>{
         const User = getUserLocalStorage()
         if(User){
             setUser(User);
         }
     },[])
-
-    useEffect(()=>{
-        apiBack_End.post('api/users/list/email',{
-            email: user?.email
-        })
-        .then(res => setData(res.data))
-        .catch(err => {return null})
-    },[user])
-
     const VerifyLoggin = async () => {
         try {
             await apiBack_End.post('admin/free',{
@@ -39,10 +28,10 @@ export const AuthProvider = ({children}: IAuthProvider) =>{
             return console.log('não autorizado');
         }
     }
-
     async function authenticate(email: string, password: string){
         const Request = await loginRequest(email, password);
-        const payload =  {token: Request?.data, email: email, name: data?.name, id: data?._id};
+        console.log(Request?.outerData)
+        const payload = {token: Request?.data, email: email, name: Request?.outerData?.name, id: Request?.outerData?._id};
         setUserLocalStorage(payload);
         setUser(payload);
         return Request?.status;

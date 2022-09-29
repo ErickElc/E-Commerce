@@ -1,7 +1,7 @@
 import { TextField, IconButton } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import React, { useState } from "react";
-
+import './input.scss'
 export default function InputHeader(){
     const [input, setInput] = useState({
         search: ''
@@ -18,7 +18,7 @@ export default function InputHeader(){
     return (
         <form onSubmit={SubmitForm} className=''>
             <TextField
-                className="bg-white"
+                className="inputs"
                 fullWidth
                 value={input.search}
                 id="filled-basic"

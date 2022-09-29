@@ -7,6 +7,7 @@ export default function Header(){
     return (
         <HeaderLayout>
             <TitleHeader className="text-2xl font-bold text-white"><Link to='/'>Eletronicos<span className="text-orange-500">.</span></Link></TitleHeader>
+            
             <InputHeader/>
             <div>
                 <IconButton>

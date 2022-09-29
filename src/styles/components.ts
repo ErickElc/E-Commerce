@@ -6,9 +6,10 @@ export const HeaderLayout = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 450px) {
-        font-size: 20px;
+    @media (max-width: 700px) {
+        flex-flow: column;
     }
+    
 `
 export const TitleHeader = styled.h2`
     font-size: 24px;
@@ -126,7 +127,12 @@ export const ConteinerCadastroProduto = styled.div`
 
 `
 export const ImageProduto = styled.img`
-    height: 300px;
+    height: 400px;
+    @media (max-width: 700px) {
+        align-self: center;
+        width: 250px;
+        height: 350px
+    }
 `
 export const ContainerProduto = styled.div`
     display: flex;
@@ -140,12 +146,18 @@ export const ProdutoComponent = styled.div`
     box-shadow: 0px 1px 5px 0px #676767;
     margin-top: 30px;
     padding: 50px;
+    @media (max-width: 700px) {
+        padding: 15px;
+    }
 `
 
 export const FlexContainer = styled.div`
     max-width: 310px;
     display: flex;
     flex-flow: wrap column;
+    @media (max-width: 700px) {
+        max-width: 100%;
+    }
 `
 
 export const ContainerCadastro = styled.div`
@@ -175,4 +187,42 @@ export const TextLink = styled.h2`
     text-decoration: underline;
     text-align: start;
     margin-top: 10px;
+`
+export const SpanEntrega = styled.span`
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    text-align: end;
+    align-self: flex-end;
+    font-size: 16px;
+`
+export const ContainerPrazos = styled.div`
+    background-color: rgba(135, 135, 135,0.5);
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+` 
+export const LayoutProduto = styled.div`
+    display: flex;
+    @media (max-width: 700px){
+        flex-flow: column;
+    }
+`
+export const SectionUl = styled.ul`
+    @media (max-width: 700px) {
+        display: none;
+        
+    }
+`
+export const SectionMenu = styled.section`
+    @media (max-width: 700px) {
+        justify-content: center;
+        
+    }
+`
+export const ContainerPopUp = styled.div`
+    display: none;
+    @media (max-width: 700px) {
+        display: flex;
+    }
 `
