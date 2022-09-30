@@ -50,6 +50,20 @@ export default function Produto(){
             alert('Não foi possível colocar o item no carrinho');
         }
     }
+    async function AddItemNoCarrinhoCompra(){
+        try {
+            const resVerify = await auth.VerifyLoggin();
+            if(resVerify === false) {
+                alert('Precisa estar logado para comprar!');
+                return navigate('/login');
+            }
+            const res = await produtosContext.Add_Item(id);
+            if(res !== 200) return alert('Não foi possível colocar o item no carrinho');
+            navigate('/carrinho')
+        } catch (error) {
+            alert('Não foi possível colocar o item no carrinho');
+        }
+    }
     return (
         <ContainerProduto>
             <ProdutoComponent className='mb-10'>
@@ -60,7 +74,7 @@ export default function Produto(){
                             (produtoValue * 2).toFixed(2)
                         }</h3>
                         <h2 className='text-orange-500 font-bold text-4xl mb-2'>R$ {(produtoValue).toFixed(2)}</h2>
-                        <Button fullWidth variant="contained" className="inputs" type="submit" color="error">Comprar</Button>
+                        <Button fullWidth variant="contained" className="inputs" type="submit" color="error" onClick={AddItemNoCarrinhoCompra}>Comprar</Button>
                         <span className='mt-3'></span>
                         <Button fullWidth variant="outlined" className="inputs mb-10" type="submit" color="error" onClick={AddItemNoCarrinho}>Adicionar ao Carrinho</Button>
                     </FlexContainer>

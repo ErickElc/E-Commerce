@@ -15,8 +15,8 @@ import Comprar from "./Comprar";
 function App() {
   return (
     <ModalHeaderProvider>
-      <AuthProvider>
-        <CarrinhoProvider>
+      <CarrinhoProvider>
+        <AuthProvider>
           <Routes>
             <Route path='/' element={<PaginaPadrao/>}>
               <Route index element={<Home/>}/>
@@ -31,8 +31,8 @@ function App() {
             <Route path="/cadastrar/:id" element={<Cadastrar/>}/>
             <Route path="/produtos/novo" element={<CadastroProduto/>}/>
           </Routes>
-        </CarrinhoProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </CarrinhoProvider>
     </ModalHeaderProvider>
   );
 }

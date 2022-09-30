@@ -47,7 +47,7 @@ export default function Comprar(){
             <ContainerProduto className="bg-black">
                 <ProdutoComponent className="bg-white">
                     <form onSubmit={VerificarValor}>
-                        <h1 className="mb-5 text-center font-bold text-2xl">Calcule o frete antes de finalizar</h1>
+                        <h1 className="mb-5 text-center font-bold text-3xl">Calcule o frete antes de finalizar</h1>
                         <TextField
                             required
                             fullWidth
@@ -69,7 +69,14 @@ export default function Comprar(){
                     {
                         (request) ? 
                         <div>
-                            <h1 className="m-3 text-center font-bold text-xl text-red-700">Valor Final:</h1>
+                            <h1 className="m-3 text-center font-bold text-2xl text-red-700">Valor Final:</h1>
+                            <h2 className="m-3 text-center font-bold text-xl">Lista de Compras</h2>
+                            {Produto.listItems.map(item =>(
+                                <ul key={item._id} className="flex justify-between">
+                                    <li className="font-bold text-lg">{item.name}</li>
+                                    <li className="font-bold text-lg"><span className="ml-3 text-end">R$: {item.value}</span></li>
+                                </ul>
+                            ))}
                             <h1 className="m-3 text-center font-bold text-xl">R$: {valores.toFixed(2).replace('.', ',')}</h1>
                             <Button fullWidth variant="contained" type="submit" onClick={FinalizarCompra}>Finalizar Compra</Button>
                         </div> : ''
