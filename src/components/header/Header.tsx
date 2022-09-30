@@ -1,7 +1,6 @@
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { useCarrinhoContext } from '../../context/Carrinho/Carrinho';
 import { HeaderLayout, TitleHeader } from "../../styles/components";
-import InputHeader from "../InputHeader/inputHeader";
 import { IconButton } from "@mui/material";
 import {Link} from 'react-router-dom';
 export default function Header(){
@@ -9,7 +8,6 @@ export default function Header(){
     return (
         <HeaderLayout>
             <TitleHeader className="text-2xl font-bold text-white"><Link to='/'>Casa do hardware<span className="text-orange-500">.</span></Link></TitleHeader>
-            <InputHeader/>
             <div>
                 <Link to='/carrinho'>
                     <IconButton >

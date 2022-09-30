@@ -1,5 +1,5 @@
-import { ProtectedLayoutLogged } from "../../components/protectedLayout/ProtectedLayout";
 import { ContainerCadastro, ContainerFormularioCadastro, TextLink } from "../../styles/components";
+import { ProtectedLayoutLogged } from "../../components/protectedLayout/ProtectedLayout";
 import { Button, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { apiBack_End } from "../../api/api";

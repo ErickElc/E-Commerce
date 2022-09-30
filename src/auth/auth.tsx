@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { IAuthProvider, IContext } from "../interfaces/interfaces";
 import { IToken} from "../interfaces/interfaces";
 import { apiBack_End } from "../api/api";
+import { useCarrinhoContext } from "../context/Carrinho/Carrinho";
 
 
 
@@ -10,6 +11,7 @@ import { apiBack_End } from "../api/api";
 export const AuthContext = createContext<IContext>({} as IContext);
 
 export const AuthProvider = ({children}: IAuthProvider) =>{
+    const CarrinhoContext = useCarrinhoContext();
     const [user, setUser] = useState<IToken | null>();
     useEffect(()=>{
         const User = getUserLocalStorage();
@@ -39,6 +41,7 @@ export const AuthProvider = ({children}: IAuthProvider) =>{
     function logout(){
         setUser(null)
         setUserLocalStorage(null)
+        CarrinhoContext.Limpar_Carrinho()
     }
     return <AuthContext.Provider value={{...user, authenticate, logout, VerifyLoggin}} >{[children]}</AuthContext.Provider>
 }

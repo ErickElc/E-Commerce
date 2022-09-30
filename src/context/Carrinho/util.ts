@@ -1,5 +1,5 @@
 import { IProducts } from "../../interfaces/interfaces";
-export const setProdutosLocalStorage = (produtos: IProducts[] | number) =>{
+export const setProdutosLocalStorage = (produtos: IProducts[] | number | null) =>{
     localStorage.setItem('carrinho', JSON.stringify(produtos));
 }
 export const getProdutosLocalStorage = () => {

@@ -142,6 +142,7 @@ export const ContainerProduto = styled.div`
     align-items: center;
     flex-flow: row wrap;
     justify-content: center;
+    height: 100vh;
 `
 export const ProdutoComponent = styled.div`
     -moz-box-shadow: 0px 1px 5px 0px #676767;
@@ -250,5 +251,8 @@ export const ContainerUserCommand = styled.div`
 `
 export const ImageCarrinho = styled.img`
     height: 50px;
-    width: 50px
+    width: 50px;
+`
+export const DivDescription = styled.div`
+    max-width: 750px;
 `

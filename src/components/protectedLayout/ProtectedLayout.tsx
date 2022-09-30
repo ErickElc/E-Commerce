@@ -20,7 +20,7 @@ export function ProtectedLayoutNoLogged({children} : {children: JSX.Element }) {
         if(status === 200){
             return children;
         }else{
-            return <PaginaPadrao><h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1></PaginaPadrao>;
+            return <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1>
         }  
     } 
     return VerifyLoggin(response);
@@ -53,6 +53,7 @@ export function ProtectedLayoutAdmin({children}: {children:JSX.Element}){
     useEffect(()=>{
         apiBack_End.post('auth/admin',{
             token: User?.token,
+            email: User?.email
         }).then(res => setResponse(res.status)).catch((err) => {
             setResponse(err.response.status)
         })
@@ -61,7 +62,7 @@ export function ProtectedLayoutAdmin({children}: {children:JSX.Element}){
         if(status === 200){
             return children;
         }else{
-            return <PaginaPadrao> <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1> </PaginaPadrao>;
+            return <PaginaPadrao> <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existee</h1> </PaginaPadrao>;
         }
     }
     return VerifyLoggin(response);

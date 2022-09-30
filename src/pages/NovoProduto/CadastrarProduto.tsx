@@ -36,6 +36,7 @@ export default function CadastroProduto(){
                         value={inputs.name} 
                         onChange={ (e) => setInputs(prev => ({...prev, name: e.target.value}))}
                     />
+                    <span className="m-3"></span>
                     <TextField
                         required
                         className="inputs"
@@ -47,6 +48,7 @@ export default function CadastroProduto(){
                         value={inputs.value} 
                         onChange={ (e) => setInputs(prev => ({...prev, value: e.target.value}))}
                     />
+                    <span className="m-3"></span>
                     <TextField
                         required
                         className="inputs"
@@ -59,6 +61,7 @@ export default function CadastroProduto(){
                         value={inputs.description} 
                         onChange={ (e) => setInputs(prev => ({...prev, description: e.target.value}))}
                     />
+                    <span className="m-3"></span>
                     <TextField
                         required
                         className="inputs"
@@ -69,6 +72,7 @@ export default function CadastroProduto(){
                         value={inputs.url_image} 
                         onChange={ (e) => setInputs(prev => ({...prev, url_image: e.target.value}))}
                     />
+                    <span className="m-3"></span>
                     <Button variant="contained" className="inputs" type="submit">Cadastrar</Button>
                 </FormComponent>
             </ConteinerCadastroProduto>

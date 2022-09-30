@@ -1,4 +1,4 @@
-import { ContainerPrazos, ContainerProduto, FlexContainer, ImageProduto, LayoutProduto, ProdutoComponent, SpanEntrega } from '../../styles/components';
+import { ContainerPrazos, ContainerProduto, DivDescription, FlexContainer, ImageProduto, LayoutProduto, ProdutoComponent, SpanEntrega } from '../../styles/components';
 import { useCarrinhoContext } from '../../context/Carrinho/Carrinho';
 import { useParams, useNavigate} from 'react-router-dom';
 import { IProducts } from '../../interfaces/interfaces';
@@ -31,7 +31,6 @@ export default function Produto(){
         e.preventDefault();
         try {
             const res = await apiBack_End.get(`api/entregas/valor/${input.cep}`)
-            console.log(res.data)
             setData(res.data)
         } catch (error) {
             console.log(error);
@@ -40,7 +39,6 @@ export default function Produto(){
     async function AddItemNoCarrinho(){
         try {
             const resVerify = await auth.VerifyLoggin();
-            console.log(resVerify)
             if(resVerify === false) {
                 alert('Precisa estar logado para comprar!');
                 return navigate('/login');
@@ -103,9 +101,9 @@ export default function Produto(){
                         </ContainerPrazos>: ''
                         }
                     </ProdutoComponent>
-                <div>
-                    <h1 className="text-xl text-gray-700 mt-5">Descrição: {produto?.description}</h1>
-                </div>
+                <DivDescription>
+                    <h1 className="text-xl text-gray-700 mt-5 break-words">Descrição: {produto?.description}</h1>
+                </DivDescription>
             </ProdutoComponent>
         </ContainerProduto>
     )

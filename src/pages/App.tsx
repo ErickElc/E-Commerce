@@ -11,6 +11,7 @@ import Login from "./login/Login";
 import Produto from "./produto";
 import Home from "./home/home";
 import Produtos from "./listaProdutos/Produtos";
+import Comprar from "./Comprar";
 function App() {
   return (
     <ModalHeaderProvider>
@@ -20,13 +21,14 @@ function App() {
             <Route path='/' element={<PaginaPadrao/>}>
               <Route index element={<Home/>}/>
               <Route path='/carrinho' element={<Carrinho/>} />
-              <Route path='/produtos/' element={<Produtos/>}/>
+              <Route path='/produtos' element={<Produtos/>}/>
               <Route path='/produtos/:id' element={<Produto/>}/>
               <Route path='/conta/:id' element={<ContaConfig/>} />
               <Route path='*' element={<h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1>}/>
             </Route>
+            <Route path='/compras/:id' element={<Comprar/>}/>
             <Route path="/login" element={<Login/>}/>
-            <Route path="/cadastrar" element={<Cadastrar/>}/>
+            <Route path="/cadastrar/:id" element={<Cadastrar/>}/>
             <Route path="/produtos/novo" element={<CadastroProduto/>}/>
           </Routes>
         </CarrinhoProvider>

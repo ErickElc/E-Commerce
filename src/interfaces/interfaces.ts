@@ -1,6 +1,6 @@
 export interface IEntrega{
-    Valor?: String,
-    PrazoEntrega?: String
+    Valor: string, 
+    PrazoEntrega?: string
 }
 export interface IAuthProvider{
     children: JSX.Element;
