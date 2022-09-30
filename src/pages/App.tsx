@@ -28,7 +28,7 @@ function App() {
             </Route>
             <Route path='/compras/:id' element={<Comprar/>}/>
             <Route path="/login" element={<Login/>}/>
-            <Route path="/cadastrar/:id" element={<Cadastrar/>}/>
+            <Route path="/cadastrar" element={<Cadastrar/>}/>
             <Route path="/produtos/novo" element={<CadastroProduto/>}/>
           </Routes>
         </AuthProvider>
