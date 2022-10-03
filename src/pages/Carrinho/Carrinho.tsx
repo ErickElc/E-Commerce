@@ -74,7 +74,7 @@ export default function Carrinho(){
                         </TableBody>
                     </Table>
                     <h2 className="text-2xl self-center text-center mb-5 font-bold">
-                        Valor: <span className="font-bold text-red-500">{valor}</span>
+                        Valor: <span className="font-bold text-red-500">R${valor.toFixed(2)}</span>
                     </h2>
                     <Button className="ml-4" fullWidth variant="contained" color="primary" onClick={Redirect}>
                             Comprar
