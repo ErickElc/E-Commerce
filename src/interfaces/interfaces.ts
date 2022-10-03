@@ -46,7 +46,10 @@ export interface IProducts{
     url_image: string,
     value: string,
     _v: number,
-    _id: string
+    _id: string,
+    quantidade: number
+    idCarrinho?: string
+
 }
 export interface ICarrinho{
     Array: [

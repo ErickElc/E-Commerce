@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { apiBack_End } from "../../api/api";
@@ -27,7 +28,6 @@ export function ProtectedLayoutNoLogged({children} : {children: JSX.Element }) {
 }
 export function ProtectedLayoutLogged({children} : {children: JSX.Element}){
     const User = getUserLocalStorage();
-    const navigate = useNavigate();
     const [response, setResponse] = useState<Number | null>(null);
     useEffect(()=>{
         apiBack_End.post('auth/free',{
@@ -35,7 +35,7 @@ export function ProtectedLayoutLogged({children} : {children: JSX.Element}){
         }).then(res => setResponse(res.status)).catch((err) => {
             setResponse(err.response.status)
         })
-    },[User, navigate])
+    },[])
     const VerifyLoggin = (status: Number | null) => {
         if(status === 200){
             
@@ -48,7 +48,6 @@ export function ProtectedLayoutLogged({children} : {children: JSX.Element}){
 }
 export function ProtectedLayoutAdmin({children}: {children:JSX.Element}){
     const User = getUserLocalStorage();
-    const navigate = useNavigate();
     const [response, setResponse] = useState<Number | null>(null);
     useEffect(()=>{
         apiBack_End.post('auth/admin',{
@@ -57,7 +56,7 @@ export function ProtectedLayoutAdmin({children}: {children:JSX.Element}){
         }).then(res => setResponse(res.status)).catch((err) => {
             setResponse(err.response.status)
         })
-    },[User, navigate])
+    },[User])
     const VerifyLoggin = (status: Number | null) => {
         if(status === 200){
             return children;

@@ -2,9 +2,9 @@ import { ProtectedLayoutPrivatePageUser } from "../../components/protectedLayout
 import { ContainerProduto, ProdutoComponent } from "../../styles/components";
 import { useCarrinhoContext } from "../../context/Carrinho/Carrinho";
 import { Button, TextField } from "@mui/material";
-import { apiBack_End } from "../../api/api";
-import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
+import { apiBack_End } from "../../api/api";
+import {useState} from 'react';
 export default function Comprar(){
     const navigate = useNavigate();
     const Produto = useCarrinhoContext();
@@ -14,9 +14,9 @@ export default function Comprar(){
 
 
     function FinalizarCompra(){
-
         setTimeout(()=>{
             alert('Sua Compra foi concluida com sucesso!');
+            Produto.Limpar_Carrinho();
             navigate('/'); 
         }, 3000);
     }
@@ -29,8 +29,9 @@ export default function Comprar(){
             let valoresFinal = 0;
             const res = await apiBack_End.get(`api/entregas/valor/${inputs.cep}`)
             const valor = (res.data?.Valor === undefined) ? '' : res.data.Valor.replace(',', '.');
+
             for(let i in Produto.listItems){
-                valoresFinal += parseFloat(Produto.listItems[i].value);
+                valoresFinal += (parseFloat(Produto.listItems[i].value) * (Produto.listItems[i].quantidade));
             }
             if(valor !== '') {
                 const valorFrete = parseFloat(valor);
@@ -74,7 +75,7 @@ export default function Comprar(){
                             {Produto.listItems.map(item =>(
                                 <ul key={item._id} className="flex justify-between">
                                     <li className="font-bold text-lg">{item.name}</li>
-                                    <li className="font-bold text-lg"><span className="ml-3 text-end">R$: {item.value}</span></li>
+                                    <li className="font-bold text-lg"><span className="ml-3 text-end">R$: {parseFloat(item.value)}</span><span className='ml-3'>x {item?.quantidade}</span></li>
                                 </ul>
                             ))}
                             <h1 className="m-3 text-center font-bold text-xl">R$: {valores.toFixed(2).replace('.', ',')}</h1>

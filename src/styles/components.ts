@@ -130,11 +130,12 @@ export const ConteinerCadastroProduto = styled.div`
 
 `
 export const ImageProduto = styled.img`
-    height: 400px;
+    height: 300px;
+    width: 400px;
     @media (max-width: 700px) {
         align-self: center;
         width: 250px;
-        height: 350px
+        height: 250px
     }
 `
 export const ContainerProduto = styled.div`
@@ -156,11 +157,12 @@ export const ProdutoComponent = styled.div`
 `
 
 export const FlexContainer = styled.div`
-    max-width: 310px;
     display: flex;
+    width: 100%;
     flex-flow: wrap column;
     @media (max-width: 700px) {
-        max-width: 100%;
+        width: 100%;
+        margin-left: 0px;
     }
 `
 
@@ -208,6 +210,7 @@ export const ContainerPrazos = styled.div`
 ` 
 export const LayoutProduto = styled.div`
     display: flex;
+    
     @media (max-width: 700px){
         flex-flow: column;
     }

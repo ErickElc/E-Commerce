@@ -25,7 +25,7 @@ export default function Produto(){
             console.log(err);
         })
     },[id]);
-    let produtoValue = (produto?.value) ? parseInt(produto.value) : 0;
+    let produtoValue = (produto?.value) ? parseFloat(produto.value) : 0;
 
     async function VerificarValor(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -80,42 +80,40 @@ export default function Produto(){
                     </FlexContainer>
                 </LayoutProduto>
                 <div>
-                    <h1 className="text-3xl text-gray-700 mt-5">{produto?.name}</h1>
+                    <h1 className="text-3xl text-gray-700 mt-5 mb-5">{produto?.name}</h1>
                 </div>
-                    <ProdutoComponent>
-                        <form onSubmit={VerificarValor}>
-                            <TextField
-                                fullWidth
-                                id="filled-basic"
-                                variant="filled"
-                                color="warning"
-                                inputProps={{ maxLength: 9 }}
-                                type="text"
-                                label="Digite seu Cep"
-                                value={input.cep}
-                                onChange={(e) => (setInput(prev => ({...prev, cep: e.target.value})))}
-                                InputProps={{
-                                    endAdornment: (
-                                        <Button variant="contained" type="submit">Verificar</Button>
-                                    )
-                                }}
-                            >
-                            </TextField>
-                        </form>
-                        {(data?.Valor && data?.PrazoEntrega) ?
-                        <ContainerPrazos >
-                            <p className='m-5 font-bold'>
-                                Valor:
-                            <SpanEntrega >R$:{data?.Valor}</SpanEntrega>
-                            </p>
-                            <p className='m-5 font-bold'>
-                                Prazo de Entrega:
-                                <SpanEntrega>em até {(!data?.PrazoEntrega) ? 'Indefinido' : data?.PrazoEntrega} dias</SpanEntrega>
-                            </p>
-                        </ContainerPrazos>: ''
-                        }
-                    </ProdutoComponent>
-                <DivDescription>
+                    <form onSubmit={VerificarValor}>
+                        <TextField
+                            fullWidth
+                            id="filled-basic"
+                            variant="filled"
+                            color="warning"
+                            inputProps={{ maxLength: 9 }}
+                            type="text"
+                            label="Digite seu Cep"
+                            value={input.cep}
+                            onChange={(e) => (setInput(prev => ({...prev, cep: e.target.value})))}
+                            InputProps={{
+                                endAdornment: (
+                                    <Button variant="contained" type="submit">Verificar</Button>
+                                )
+                            }}
+                        >
+                        </TextField>
+                    </form>
+                    {(data?.Valor && data?.PrazoEntrega) ?
+                    <ContainerPrazos>
+                        <p className='m-5 font-bold'>
+                            Valor:
+                        <SpanEntrega >R$:{data?.Valor}</SpanEntrega>
+                        </p>
+                        <p className='m-5 font-bold'>
+                            Prazo de Entrega:
+                            <SpanEntrega>em até {(!data?.PrazoEntrega) ? 'Indefinido' : data?.PrazoEntrega} dias</SpanEntrega>
+                        </p>
+                    </ContainerPrazos>: ''
+                    }
+            <DivDescription>
                     <h1 className="text-xl text-gray-700 mt-5 break-words">Descrição: {produto?.description}</h1>
                 </DivDescription>
             </ProdutoComponent>

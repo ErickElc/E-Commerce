@@ -8,6 +8,7 @@ import { IProducts } from "../../interfaces/interfaces";
 import { useNavigate } from "react-router-dom";
 
 export default function Carrinho(){
+    let valor = 0;
     const navigate = useNavigate();
     const User = getUserLocalStorage();
     const Produtos = getProdutosLocalStorage();
@@ -15,11 +16,14 @@ export default function Carrinho(){
     function Redirect(){
         navigate('/compras/' + User.id)
     }
+    for(let i in Produtos){
+        valor += (parseFloat(Produtos[i].value) * Produtos[i].quantidade);
+    }
     return(
         <ProtectedLayoutNoLogged>
             {(produtosContext.listItems.length === 0) ? <h1 className="font-bold text-2xl mt-10 text-center">Não tem nenhum produto adicionado</h1> : 
                 <TableContainer>
-                    <Table className="mb-20">
+                    <Table className="mb-10">
                         <TableHead>
                             <TableRow>
                                 <TableCell>
@@ -30,6 +34,9 @@ export default function Carrinho(){
                                 </TableCell>
                                 <TableCell>
                                     valor
+                                </TableCell>
+                                <TableCell>
+                                    Quantidade
                                 </TableCell>
                                 <TableCell>
                                     Excluir
@@ -53,7 +60,12 @@ export default function Carrinho(){
                                         </span>
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outlined" color="error" onClick={() => produtosContext.Remove_Items(items._id)}>
+                                        <button  className="bg-none text-2xl font-bold mr-3"onClick={() => produtosContext.aumentar_quantidade(items?.idCarrinho)}>+</button>
+                                        <span className="text-2xl font-bold">{items?.quantidade}</span>
+                                        <button className="bg-none text-2xl font-bold ml-3 text-red-700" onClick={() => produtosContext.diminuir_quantidade(items?.idCarrinho)}>-</button>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button variant="outlined" color="error" onClick={() => produtosContext.Remove_Items(items?.idCarrinho)}>
                                             Excluir
                                         </Button>
                                     </TableCell>
@@ -61,6 +73,9 @@ export default function Carrinho(){
                             )}
                         </TableBody>
                     </Table>
+                    <h2 className="text-2xl self-center text-center mb-5 font-bold">
+                        Valor: <span className="font-bold text-red-500">{valor}</span>
+                    </h2>
                     <Button className="ml-4" fullWidth variant="contained" color="primary" onClick={Redirect}>
                             Comprar
                     </Button>
