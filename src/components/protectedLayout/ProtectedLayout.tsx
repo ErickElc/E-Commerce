@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { apiBack_End } from "../../api/api";
 import { getUserLocalStorage } from "../../auth/util";
 import PaginaPadrao from "../PaginaPadrao";
@@ -8,7 +8,6 @@ import PaginaPadrao from "../PaginaPadrao";
 
 export function ProtectedLayoutNoLogged({children} : {children: JSX.Element }) {
     const User = getUserLocalStorage();
-    const navigate = useNavigate();
     const [response, setResponse] = useState<Number | null>(null);
     useEffect(()=>{
         apiBack_End.post('auth/free',{
@@ -16,7 +15,7 @@ export function ProtectedLayoutNoLogged({children} : {children: JSX.Element }) {
         }).then(res => setResponse(res.status)).catch((err) => {
             setResponse(err.response.status)
         })
-    },[User, navigate])
+    },[])
     const VerifyLoggin = (status: Number | null) => {
         if(status === 200){
             return children;
