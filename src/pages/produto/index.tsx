@@ -38,7 +38,7 @@ export default function Produto(){
     }
     async function AddItemNoCarrinho(){
         try {
-            const resVerify = await auth.VerifyLoggin();
+            const resVerify = await auth.verifyLogin();
             if(resVerify === false) {
                 alert('Precisa estar logado para comprar!');
                 return navigate('/login');
@@ -52,7 +52,7 @@ export default function Produto(){
     }
     async function AddItemNoCarrinhoCompra(){
         try {
-            const resVerify = await auth.VerifyLoggin();
+            const resVerify = await auth.verifyLogin();
             if(resVerify === false) {
                 alert('Precisa estar logado para comprar!');
                 return navigate('/login');
