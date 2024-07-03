@@ -6,9 +6,14 @@ export interface IAuthProvider{
     children: JSX.Element;
 }
 export interface IContext {
-    authenticate: (email: string, password: string) => Promise<number| undefined>;
-    logout: () => void;
-    VerifyLoggin: () => void | Promise<Boolean>
+  authenticate: (
+    email: string,
+    password: string
+  ) => Promise<number | undefined>;
+  logout: () => void;
+  verifyLogin: () => Promise<boolean>;
+  verifyAdmin: () => Promise<boolean>;
+  verifyUser: () => Promise<boolean>;
 }
 export interface IModalState {
     open?: boolean
@@ -86,8 +91,9 @@ export interface IUser{
     createdDate: string
 }
 export interface IToken{
-    token?: string,
+    token: string,
     email?: string,
     _id?: string;
+    id: string;
     name?: string,
 }
