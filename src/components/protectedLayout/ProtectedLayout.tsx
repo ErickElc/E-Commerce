@@ -1,89 +1,89 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { apiBack_End } from "../../api/api";
-import { getUserLocalStorage } from "../../auth/util";
 import PaginaPadrao from "../PaginaPadrao";
+import { useAuthContext } from "../../auth/auth";
 
 
 export function ProtectedLayoutNoLogged({children} : {children: JSX.Element }) {
-    const User = getUserLocalStorage();
-    const [response, setResponse] = useState<Number | null>(null);
-    useEffect(()=>{
-        apiBack_End.post('auth/free',{
-            token: User?.token,
-        }).then(res => setResponse(res.status)).catch((err) => {
-            setResponse(err.response.status)
+    const userAuthContext = useAuthContext();
+    const [response, setResponse] = useState<Boolean>(false);
+    useEffect(() => {
+      userAuthContext
+        .verifyLogin()
+        .then((res) => {
+          setResponse(res);
         })
-    },[])
-    const VerifyLoggin = (status: Number | null) => {
-        if(status === 200){
-            return children;
-        }else{
-            return <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1>
-        }  
-    } 
-    return VerifyLoggin(response);
+        .catch((err) => {
+          setResponse(err);
+        });
+    }, []);
+
+    return !response ? (
+      <h1 className="font-bold text-2xl mt-10">
+        ERROR: 404 Essa página não existe
+      </h1>
+    ) : (
+      children
+    );
 }
 export function ProtectedLayoutLogged({children} : {children: JSX.Element}){
-    const User = getUserLocalStorage();
-    const [response, setResponse] = useState<Number | null>(null);
+    const userAuthContext = useAuthContext();
+    const [response, setResponse] = useState<Boolean>(false);
     useEffect(()=>{
-        apiBack_End.post('auth/free',{
-            token: User?.token,
-        }).then(res => setResponse(res.status)).catch((err) => {
-            setResponse(err.response.status)
-        })
-    },[])
-    const VerifyLoggin = (status: Number | null) => {
-        if(status === 200){
+      console.log('carregou')
+        userAuthContext.verifyLogin()
+        .then(res => { 
+          console.log(res)
+                setResponse(!res)
+            }).catch(err => {
+              console.log(err)
+                setResponse(!err);
+            });
+    },[response, userAuthContext])
             
-            return <PaginaPadrao><h1>Você não tem acesso</h1></PaginaPadrao>;
-        }else{
-            return children;
-        }
-    }
-    return VerifyLoggin(response);
+    return (!response) ?  (<PaginaPadrao><h1>Você não tem acesso</h1></PaginaPadrao>) : children;
 }
 export function ProtectedLayoutAdmin({children}: {children:JSX.Element}){
-    const User = getUserLocalStorage();
-    const [response, setResponse] = useState<Number | null>(null);
-    useEffect(()=>{
-        apiBack_End.post('auth/admin',{
-            token: User?.token,
-            email: User?.email
-        }).then(res => setResponse(res.status)).catch((err) => {
-            setResponse(err.response.status)
+    const userAuthContext = useAuthContext();
+    const [response, setResponse] = useState<Boolean>(false);
+    useEffect(() => {
+      userAuthContext
+        .verifyAdmin()
+        .then((res) => {
+          setResponse(res);
         })
-    },[User])
-    const VerifyLoggin = (status: Number | null) => {
-        if(status === 200){
-            return children;
-        }else{
-            return <PaginaPadrao> <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existee</h1> </PaginaPadrao>;
-        }
-    }
-    return VerifyLoggin(response);
-}
+        .catch((err) => {
+          setResponse(err);
+        });
+    }, []);
+
+    return !response ? (
+      <PaginaPadrao> <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existee</h1> </PaginaPadrao>
+    ) : (
+      children
+    );
+}     
 export function ProtectedLayoutPrivatePageUser({children} : {children: JSX.Element}){
-    const {id} = useParams();
-    const User = getUserLocalStorage();
-    const [response , setResponse] = useState<Number | null>(null);
-    useEffect(()=>{
-        apiBack_End.post(`auth/private/free/${id}`,{
-            token: User?.token,
-            email: User?.email
-        }).then(res => setResponse(res.status)).catch((err) => {
-            setResponse(err.response.status)
+    const userAuthContext = useAuthContext();
+    const [response, setResponse] = useState<Boolean>(false);
+    useEffect(() => {
+      userAuthContext
+        .verifyUser()
+        .then((res) => {
+          setResponse(res);
         })
-    },[User,id])
-    const VerifyLoggin = (status: Number | null) => {
-        if(status === 202){
-            return children;
-        }else{
-            return <h1 className='font-bold text-2xl mt-10'>ERROR: 404 Essa página não existe</h1>;
-        }
-    }
-    return VerifyLoggin(response);
+        .catch((err) => {
+          setResponse(err);
+        });
+        
+    }, [response]);
+    return !response ? (
+      
+        <h1 className="font-bold text-2xl mt-10">
+          ERROR: 404 Essa página não existee
+        </h1>
+    ) : (
+      children
+    );
 
 }
