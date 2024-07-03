@@ -1,13 +1,12 @@
 import { ContainerCadastro, ContainerFormularioCadastro, TextLink } from "../../styles/components";
 import { ProtectedLayoutLogged } from "../../components/protectedLayout/ProtectedLayout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import { useAuthContext } from "../../auth/auth";
 import React, { useState } from "react";
 import './login.scss';
 
 export default function Login(){
-    const navigate = useNavigate();
     const auth = useAuthContext();
     const [inputs , setInputs] = useState({
         email: '',
@@ -20,9 +19,6 @@ export default function Login(){
             console.log(res)
             if(res === 202){
                 console.log('logado');
-                alert('login realizado com sucesso');
-                navigate('/');
-                return (window.location.reload());
             }
             else{
                 setInputs({email: '', password: ''});
