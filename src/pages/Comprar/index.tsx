@@ -1,14 +1,12 @@
 import { ProtectedLayoutPrivatePageUser } from "../../components/protectedLayout/ProtectedLayout";
 import { ContainerProduto, ProdutoComponent } from "../../styles/components";
 import { useCarrinhoContext } from "../../context/Carrinho/Carrinho";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { apiBack_End } from "../../api/api";
 import {useState} from 'react';
 export default function Comprar(){
     const navigate = useNavigate();
     const Produto = useCarrinhoContext();
-    const [inputs, setInputs] = useState({cep: ''});
     const [valores, setValores] = useState(0);
     const [request, setRequest] = useState(false);
 
@@ -27,8 +25,7 @@ export default function Comprar(){
         e.preventDefault();
         try {
             let valoresFinal = 0;
-            const res = await apiBack_End.get(`api/entregas/valor/${inputs.cep}`)
-            const valor = (res.data?.Valor === undefined) ? '' : res.data.Valor.replace(',', '.');
+            let valor = '0'
 
             for(let i in Produto.listItems){
                 valoresFinal += (parseFloat(Produto.listItems[i].value) * (Produto.listItems[i].quantidade));
@@ -43,47 +40,54 @@ export default function Comprar(){
             console.log(error);
         }
     }
-    return(
-        <ProtectedLayoutPrivatePageUser>
-            <ContainerProduto className="bg-black">
-                <ProdutoComponent className="bg-white">
-                    <form onSubmit={VerificarValor}>
-                        <h1 className="mb-5 text-center font-bold text-3xl">Calcule o frete antes de finalizar</h1>
-                        <TextField
-                            required
-                            fullWidth
-                            id="outlined-basic"
-                            variant="outlined"
-                            color="primary"
-                            inputProps={{ maxLength: 8 }}
-                            type="text"
-                            label="Digite seu Cep"
-                            value={inputs.cep}
-                            onChange={(e) => (setInputs(prev => ({...prev, cep: e.target.value})))}
-                            InputProps={{
-                                endAdornment: (
-                                    <Button variant="contained" type="submit">Verificar</Button>
-                                )
-                            }}
-                        />
-                    </form>
-                    {
-                        (request) ? 
-                        <div>
-                            <h1 className="m-3 text-center font-bold text-2xl text-red-700">Valor Final:</h1>
-                            <h2 className="m-3 text-center font-bold text-xl">Lista de Compras</h2>
-                            {Produto.listItems.map(item =>(
-                                <ul key={item._id} className="flex justify-between">
-                                    <li className="font-bold text-lg">{item.name}</li>
-                                    <li className="font-bold text-lg"><span className="ml-3 text-end">R$: {parseFloat(item.value)}</span><span className='ml-3'>x {item?.quantidade}</span></li>
-                                </ul>
-                            ))}
-                            <h1 className="m-3 text-center font-bold text-xl">R$: {valores.toFixed(2).replace('.', ',')}</h1>
-                            <Button fullWidth variant="contained" type="submit" onClick={FinalizarCompra}>Finalizar Compra</Button>
-                        </div> : ''
-                    }
-                </ProdutoComponent>
-            </ContainerProduto>
-        </ProtectedLayoutPrivatePageUser>
-    )
+    return (
+      <ProtectedLayoutPrivatePageUser>
+        <ContainerProduto className="bg-black">
+          <ProdutoComponent className="bg-white">
+            {request ? (
+              <div>
+                <h1 className="m-3 text-center font-bold text-2xl text-red-700">
+                  Valor Final:
+                </h1>
+                <h2 className="m-3 text-center font-bold text-xl">
+                  Lista de Compras
+                </h2>
+                {Produto.listItems.map((item) => (
+                  <ul key={item._id} className="flex justify-between">
+                    <li className="font-bold text-lg">{item.name}</li>
+                    <li className="font-bold text-lg">
+                      <span className="ml-3 text-end">
+                        R$: {parseFloat(item.value)}
+                      </span>
+                      <span className="ml-3">x {item?.quantidade}</span>
+                    </li>
+                  </ul>
+                ))}
+                <h1 className="m-3 text-center font-bold text-xl">
+                  R$: {valores.toFixed(2).replace(".", ",")}
+                </h1>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  type="submit"
+                  onClick={FinalizarCompra}
+                >
+                  Finalizar Compra
+                </Button>
+              </div>
+            ) : (
+              <form onSubmit={VerificarValor}>
+                <h1 className="mb-5 text-center font-bold text-3xl">
+                  Calcule o frete antes de finalizar
+                </h1>
+
+                <Button variant="contained" type="submit">
+                  Verificar
+                </Button>
+              </form>
+            )}
+          </ProdutoComponent>
+        </ContainerProduto>
+      </ProtectedLayoutPrivatePageUser>
+    );
 }
