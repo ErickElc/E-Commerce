@@ -14,7 +14,7 @@ export default function Carrinho(){
     const Produtos = getProdutosLocalStorage();
     const produtosContext = useCarrinhoContext();
     function Redirect(){
-        navigate('/compras/' + User.id)
+        navigate('/compras/' + User?.id)
     }
     for(let i in Produtos){
         valor += (parseFloat(Produtos[i].value) * Produtos[i].quantidade);
