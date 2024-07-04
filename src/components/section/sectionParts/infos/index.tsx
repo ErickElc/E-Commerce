@@ -1,10 +1,7 @@
-import {
-  ContainerListSection,
-  ContainerPopUp,
-  SectionMenu,
-  SectionUl,
-  SpanSection,
-} from "../../styles/components";
+import { SectionUl, SpanSection } from "../../../../styles/components";
+import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from "@mui/icons-material/Email";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default function SectionInfos() {
   return (

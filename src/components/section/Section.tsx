@@ -1,4 +1,4 @@
-import { ContainerListSection, ContainerPopUp, SectionMenu, SectionUl, SpanSection } from '../../styles/components';
+import { ContainerListSection, ContainerPopUp, SectionMenu, SpanSection } from '../../styles/components';
 import { useModalHeaderContext } from '../../context/ModalHeader/ModalHeader';
 import { IToken } from '../../interfaces/interfaces';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -11,6 +11,7 @@ import { useAuthContext } from '../../auth/auth';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link} from 'react-router-dom';
 import './styles.scss';
+import SectionInfos from './sectionParts/infos';
 
 export interface SectionProps {
     user: IToken | null;
@@ -88,7 +89,7 @@ export default function Section({user, userAuthenticate}: SectionProps) {
             ) : (
                 ""
             )}
-            <SectionInfos />
+            <SectionInfos/>
             <ContainerListSection className="flex justify-between">
                 {!userAuthenticate ? (
                     <ul className="flex justify-between">
